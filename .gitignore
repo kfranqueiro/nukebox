@@ -1,0 +1,4 @@
+atom-shell
+node_modules
+*.css
+/src/d*

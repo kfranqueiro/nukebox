@@ -1,0 +1,7 @@
+{
+	"name": "nukebox",
+	"description": "A music player built with atom-shell.",
+	"version": "0.0.1-pre",
+	"main": "src/browser/main.js",
+	"author": "Kenneth G. Franqueiro"
+}

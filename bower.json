@@ -1,0 +1,10 @@
+{
+	"name": "nukebox",
+	"description": "A music player built with atom-shell.",
+	"authors": [ "Kenneth G. Franqueiro" ],
+	"dependencies": {
+		"dojo": "~1.10.4",
+		"dgrid": "SitePen/dgrid#623066e"
+	},
+	"license": [ "MIT" ]
+}

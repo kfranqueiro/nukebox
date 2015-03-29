@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+var path = require('path');
+var spawn = require('child_process').spawn;
+
+var productName = 'Nukebox';
+var name = 'nukebox';
+var cwd = path.resolve(__dirname, '..');
+
+// Linux
+var cmd = path.join(cwd, 'atom-shell', productName, name);
+
+if (process.platform === 'darwin') {
+    cmd = path.join(cwd, 'atom-shell', productName + '.app', 'Contents', 'MacOS', productName);
+}
+
+if (process.platform === 'win32') {
+    cmd = path.join(cwd, 'atom-shell', productName, productName + '.exe');
+}
+
+var child = spawn(cmd, [ '.' ], {
+	cwd: cwd
+});
+child.stdout.on('data', function (data) {
+    console.log(data.toString());
+});
+child.stderr.on('data', function (data) {
+    console.error(data.toString());
+});
+child.on('close', function (code) {
+    process.exit(code);
+});

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="resources/nukebox.css">
+	</head>
+	<body>
+		<script>
+			// jshint unused: false
+			var dojoConfig = {
+				async: true,
+				deps: [ 'app/main' ],
+				has: {
+					'host-node': false // Prevent dojo from being fooled by atom-shell
+				}
+			};
+			window.oldRequire = require;
+			delete window.require;
+		</script>
+		<script src="dojo/dojo.js"></script>
+		<script>
+			window.dojoRequire = require;
+			window.require = window.oldRequire;
+		</script>
+	</body>
+</html>
