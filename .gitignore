@@ -2,3 +2,4 @@ atom-shell
 node_modules
 *.css
 /src/d*
+/src/id3

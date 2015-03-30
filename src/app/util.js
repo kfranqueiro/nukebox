@@ -1,8 +1,8 @@
 define([
+	'dojo/Deferred',
 	'dojo/on',
-	'dojo/keys',
-	'dojo/query'
-], function (on, keys) {
+	'dojo/string'
+], function (Deferred, on, string) {
 	var util = {
 		/**
 		 * Utility function for returning a removable handle which itself removes multiple handles.
@@ -30,6 +30,39 @@ define([
 						handler(event);
 					}
 				});
+			};
+		},
+
+		readableTime: function (rawSeconds) {
+			rawSeconds = Math.round(rawSeconds);
+			var seconds = rawSeconds % 60;
+			var minutes = Math.floor(rawSeconds / 60);
+			var hours = 0;
+
+			if (minutes > 60) {
+				hours = Math.floor(minutes / 60);
+				minutes = minutes % 60;
+			}
+			return (hours ? string.pad(hours, 2) + ':' : '') +
+				string.pad(minutes, 2) + ':' + string.pad(seconds, 2);
+		},
+
+		/**
+		 * Given a callback(err, res) style function, returns a function that returns a promise instead.
+		 * @param {Function} func Original function to be wrapped
+		 */
+		promisify: function (func) {
+			return function () {
+				var dfd = new Deferred();
+				func.apply(this, Array.prototype.slice.call(arguments).concat(function (err, res) {
+					if (err) {
+						dfd.reject(err);
+					}
+					else {
+						dfd.resolve(res);
+					}
+				}));
+				return dfd.promise;
 			};
 		}
 	};

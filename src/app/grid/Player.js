@@ -2,7 +2,8 @@ define([
 	'dojo/_base/declare',
 	'dojo/on',
 	'dojo/keys',
-	'../util'
+	'../util',
+	'dojo/query'
 ], function (declare, on, keys, util) {
 	function dblclickOrEnter(target, handler) {
 		return util.createCompositeHandle([

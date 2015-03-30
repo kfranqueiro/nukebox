@@ -9,9 +9,10 @@ define([
 	'./grid/Player',
 	'dstore/Memory',
 	'dstore/Trackable',
+	'./audioInfo',
 	'dojo/i18n!./nls/main'
 ], function (declare, keys, OnDemandGrid, Keyboard, Selection, ColumnHider, FileDrop, Player,
-		Memory, Trackable, i18n) {
+		Memory, Trackable, audioInfo, i18n) {
 
 	// TODO: persistence
 	var store = new (declare([ Memory, Trackable ]))();
@@ -49,14 +50,26 @@ define([
 		},
 
 		_onFilesDrop: function (files) {
+			var tracks = [];
+
 			for (var i = 0, length = files.length; i < length; i++) {
-				store.add({
+				tracks[i] = store.addSync({
 					path: files[i].path,
-					// TODO: process metadata
 					title: files[i].name.slice(0, -4),
 					length: files[i].size
 				});
 			}
+
+			// Attempt to parse id3 metadata; update the store if successful
+			tracks.forEach(function (track, i) {
+				audioInfo(files[i]).then(function (info) {
+					track.artist = info.artist;
+					track.album = info.album;
+					track.title = info.title;
+					track.length = info.length;
+					store.put(track);
+				});
+			});
 		}
 	});
 });
