@@ -39,4 +39,4 @@ Additionally, the following keyboard shortcuts are available within the grid:
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[MIT](./LICENSE)
