@@ -3,3 +3,4 @@ node_modules
 *.css
 /src/d*
 /src/id3
+/src/octicons

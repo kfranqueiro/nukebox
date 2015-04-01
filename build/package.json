@@ -6,7 +6,6 @@
 		"grunt-build-atom-shell": "~1.1.5",
 		"grunt-contrib-clean": "~0.6",
 		"grunt-contrib-stylus": "~0.21",
-		"grunt-contrib-watch": "~0.6.1",
-		"nib": "~1.0.4"
+		"grunt-contrib-watch": "~0.6.1"
 	}
 }

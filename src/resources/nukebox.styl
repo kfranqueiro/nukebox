@@ -1,5 +1,3 @@
-@import 'nib/vendor';
-@import 'variables';
 @import '../dgrid/css/dgrid';
 @import '../dgrid/css/extensions/ColumnHider';
 
@@ -14,10 +12,28 @@ body {
 	width: 100%;
 }
 
-.PlayerControls {
+.PlayerControls,
+.SongsGrid {
 	position: absolute;
-	height: $playerHeight;
+	left: 0;
+	right: 0;
+}
+
+.PlayerControls {
+	font-size: 0;
+}
+
+.PlayerControls-icon {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.PlayerControls input[type=range] {
 	width: 100%;
 }
 
-@import 'SongsGrid';
+.SongsGrid {
+	// bottom/top expected TBD by skin
+	height: auto;
+}

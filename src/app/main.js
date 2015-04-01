@@ -16,8 +16,8 @@ define([
 	});
 
 	var keymap = {};
-	keymap[keys.LEFT_ARROW] = lang.hitch(controls, 'seekIncrement', -5);
-	keymap[keys.RIGHT_ARROW] = lang.hitch(controls, 'seekIncrement', 5);
+	keymap[keys.LEFT_ARROW] = lang.hitch(controls, 'rewind');
+	keymap[keys.RIGHT_ARROW] = lang.hitch(controls, 'fastForward');
 	keymap[keys.ESCAPE] = lang.hitch(controls, 'stop');
 	keymap[keys.SPACE] = function () {
 		controls[controls.get('isPaused') ? 'play' : 'pause']();

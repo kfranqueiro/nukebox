@@ -22,7 +22,8 @@ define([
 		postCreate: function () {
 			this.inherited(arguments);
 			this.on(on.selector('.dgrid-content .dgrid-row', dblclickOrEnter), this._playTrackFromRow.bind(this));
-			this.playerControls.on('ended', this.playNext.bind(this));
+			this.playerControls.on('next,ended', this.playNext.bind(this));
+			this.playerControls.on('previous', this.playPrevious.bind(this));
 		},
 
 		renderRow: function (item) {
@@ -50,16 +51,14 @@ define([
 			// TODO: need more logic here when reordering is added
 		},
 
-		/**
-		 * Advances to the next track in the playlist and plays it.
-		 */
-		playNext: function () {
+		_playNeighbor: function (direction) {
 			var self = this;
-			var next = this._playingIndex + 1;
+			var index = this._playingIndex + direction;
+			var isAtEnd = direction > 0 ? index >= this.get('total') : index < 0;
 
-			if (next >= this.get('total')) {
+			if (isAtEnd) {
 				if (this.repeat) {
-					next = 0;
+					index = direction > 0 ? 0 : this.get('total') - 1;
 				}
 				else {
 					this._playingTrack = this._playingIndex = null;
@@ -68,11 +67,25 @@ define([
 				}
 			}
 
-			this.collection.fetchRange({ start: next, end: next + 1 }).then(function (results) {
+			this.collection.fetchRange({ start: index, end: index + 1 }).then(function (results) {
 				if (results[0]) {
-					self._playTrack(results[0], next);
+					self._playTrack(results[0], index);
 				}
 			});
+		},
+
+		/**
+		 * Advances to the next track in the playlist and plays it.
+		 */
+		playNext: function () {
+			this._playNeighbor(1);
+		},
+
+		/**
+		 * Moves to the previous track in the playlist and plays it.
+		 */
+		playPrevious: function () {
+			this._playNeighbor(-1);
 		},
 
 		_playTrack: function (track, index) {

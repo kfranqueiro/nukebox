@@ -1,0 +1,41 @@
+// This file includes styles to set up octicon icons on the appropriate selectors.
+// This can be imported by skins to use octicons as the default icon set.
+
+@import '../octicons';
+
+.PlayerControls-icon {
+	@extend .octicon;
+}
+
+.PlayerControls-controls {
+	&-previous:before {
+		@extend .octicon-jump-left:before;
+	}
+	&-rewind:before {
+		@extend .octicon-playback-rewind:before;
+	}
+	&-stop:before {
+		@extend .octicon-primitive-square:before;
+	}
+	&-pause:before {
+		@extend .octicon-playback-pause:before;
+	}
+	&-play:before {
+		@extend .octicon-playback-play:before;
+	}
+	&-fastforward:before {
+		@extend .octicon-playback-fast-forward:before;
+	}
+	&-next:before {
+		@extend .octicon-jump-right:before;
+	}
+}
+
+.PlayerControls-volume {
+	&-unmuted:before {
+		@extend .octicon-unmute:before;
+	}
+	&-muted:before {
+		@extend .octicon-mute:before;
+	}
+}

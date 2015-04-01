@@ -32,12 +32,14 @@ module.exports = function (grunt) {
 		stylus: {
 			options: {
 				compress: true,
-				'resolve url': true,
-				use: [ require('nib') ]
+				'resolve url': true
 			},
 
 			compile: {
-				files: { '../src/resources/nukebox.css': '../src/resources/nukebox.styl' }
+				files: {
+					'../src/resources/nukebox.css': '../src/resources/nukebox.styl',
+					'../src/resources/skins/default.css': '../src/resources/skins/default.styl'
+				}
 			}
 		},
 
