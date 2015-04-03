@@ -3,7 +3,10 @@
 Nukebox is a music player built using [atom-shell](https://github.com/atom/atom-shell/) and
 [dgrid](http://dgrid.io/).
 
-# Installation
+# Build Instructions
+
+First, make sure you have the [prerequisites for building atom-shell on your platform](https://github.com/atom/atom-shell/tree/master/docs#development).
+(You don't need to build it manually; grunt will handle that.)
 
 1. Clone this repository
 1. `bower install`
@@ -15,9 +18,7 @@ Nukebox is a music player built using [atom-shell](https://github.com/atom/atom-
 
 ## Running the Application
 
-From the top-level directory of the repository: `bin/run` (or `bin/run.cmd` on Windows)
-
-(Note:  This hasn't yet been tested on Windows or Linux.  This thing's just getting off the ground!)
+Run `bin/run` (or `bin/run.cmd` on Windows).
 
 ## Adding Music
 

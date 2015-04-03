@@ -8,14 +8,14 @@ var name = 'nukebox';
 var cwd = path.resolve(__dirname, '..');
 
 // Linux
-var cmd = path.join(cwd, 'atom-shell', productName, name);
+var cmd = path.join(cwd, 'atom-shell', name);
 
 if (process.platform === 'darwin') {
     cmd = path.join(cwd, 'atom-shell', productName + '.app', 'Contents', 'MacOS', productName);
 }
 
 if (process.platform === 'win32') {
-    cmd = path.join(cwd, 'atom-shell', productName, productName + '.exe');
+    cmd = path.join(cwd, 'atom-shell', name + '.exe');
 }
 
 var child = spawn(cmd, [ '.' ], {
