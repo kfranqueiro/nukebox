@@ -35,5 +35,19 @@ menu.push(
 				}
 			}
 		]
+	},
+	{
+		label: '&Options',
+		submenu: [
+			{
+				label: '&Repeat',
+				type: 'checkbox',
+				accelerator: 'CmdOrCtrl+L',
+				click: function (item) {
+					var webContents = BrowserWindow.getFocusedWindow().webContents;
+					webContents.send('option', 'repeat', item.checked);
+				}
+			}
+		]
 	}
 );

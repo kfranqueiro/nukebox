@@ -9,11 +9,20 @@ define([
 	var grid = new SongsGrid({
 		playerControls: controls
 	});
+	var ipc = require('ipc');
 
 	[ controls, grid ].forEach(function (widget) {
 		document.body.appendChild(widget.domNode);
 		widget.startup();
 	});
+
+	ipc.on('option', function (option, value) {
+		if (option === 'repeat') {
+			grid.set('repeat', value);
+		}
+	});
+
+	// Global hotkeys
 
 	var keymap = {};
 	keymap[keys.LEFT_ARROW] = lang.hitch(controls, 'rewind');
@@ -33,5 +42,5 @@ define([
 	// Catch-all to prevent app from navigating to a dropped file
 	on(document.body, 'dragover, drop', function (event) {
 		event.preventDefault();
-	})
+	});
 });

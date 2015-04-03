@@ -11,7 +11,12 @@ app.on('window-all-closed', function () {
 });
 
 app.on('ready', function () {
-	mainWindow = new BrowserWindow({ width: 800, height: 600 });
+	mainWindow = new BrowserWindow({
+		center: true,
+		title: 'Nukebox',
+		width: 800,
+		height: 600
+	});
 
 	Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 	mainWindow.loadUrl('file://' + require('path').resolve(__dirname, '..', 'index.html'));
