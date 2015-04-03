@@ -42,6 +42,14 @@ define([
 			this.addKeyHandler(keys.DELETE, removeSong);
 		},
 
+		renderRow: function (item) {
+			var row = this.inherited(arguments);
+			if (item.unplayable) {
+				row.classList.add('is-unplayable');
+			}
+			return row;
+		},
+
 		_removeSong: function (event) {
 			event.preventDefault();
 			for (var id in this.selection) {
@@ -67,6 +75,9 @@ define([
 					track.album = info.album;
 					track.title = info.title;
 					track.length = info.length;
+				}, function () {
+					track.unplayable = true;
+				}).then(function () {
 					store.put(track);
 				});
 			});

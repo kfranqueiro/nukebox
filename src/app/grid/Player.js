@@ -51,14 +51,15 @@ define([
 			// TODO: need more logic here when reordering is added
 		},
 
-		_playNeighbor: function (direction) {
+		_playNeighbor: function (step) {
 			var self = this;
-			var index = this._playingIndex + direction;
-			var isAtEnd = direction > 0 ? index >= this.get('total') : index < 0;
+			var total = this.get('total');
+			var index = this._playingIndex + step;
+			var isAtEnd = step > 0 ? index >= total : index < 0;
 
 			if (isAtEnd) {
 				if (this.repeat) {
-					index = direction > 0 ? 0 : this.get('total') - 1;
+					index = (index + total) % total;
 				}
 				else {
 					this._playingTrack = this._playingIndex = null;
@@ -69,7 +70,12 @@ define([
 
 			this.collection.fetchRange({ start: index, end: index + 1 }).then(function (results) {
 				if (results[0]) {
-					self._playTrack(results[0], index);
+					if (results[0].unplayable) {
+						self._playNeighbor(step + (step > 0 ? 1 : -1));
+					}
+					else {
+						self._playTrack(results[0], index);
+					}
 				}
 			});
 		},

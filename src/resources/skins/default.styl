@@ -95,8 +95,14 @@ $iconSize = 16px;
 	@import '../../dgrid/css/skins/skin';
 
 	.is-playing {
-		// Row for track that is currently playing
+		// Applied to row for track that is currently playing
 		font-weight: bold;
+	}
+
+	.is-unplayable {
+		// Applied to rows for files that are in formats that Chromium can't play
+		color: #ccc;
+		font-style: italic;
 	}
 
 	.dgrid-no-data {

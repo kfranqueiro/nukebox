@@ -30,6 +30,10 @@ define([
 				}, tags));
 				document.body.removeChild(audioElement);
 			});
+			on.once(audioElement, 'error', function (event) {
+				dfd.reject(event);
+				document.body.removeChild(audioElement);
+			});
 
 			return dfd.promise;
 		});
