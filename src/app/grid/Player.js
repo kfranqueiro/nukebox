@@ -62,7 +62,6 @@ define([
 					index = (index + total) % total;
 				}
 				else {
-					this._playingTrack = this._playingIndex = null;
 					this.playerControls.stop();
 					return;
 				}
