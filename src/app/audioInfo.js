@@ -37,5 +37,5 @@ define([
 
 			return dfd.promise;
 		});
-	}
+	};
 });
