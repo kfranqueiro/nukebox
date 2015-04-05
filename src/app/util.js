@@ -44,7 +44,7 @@ define([
 				minutes = minutes % 60;
 			}
 			return (hours ? string.pad(hours, 2) + ':' : '') +
-				string.pad(minutes, 2) + ':' + string.pad(seconds, 2);
+				(hours ? string.pad(minutes, 2) : minutes) + ':' + string.pad(seconds, 2);
 		},
 
 		/**

@@ -1,10 +1,12 @@
 @import '../dgrid/css/dgrid';
 @import '../dgrid/css/extensions/ColumnHider';
 
+$fontSize = 12px;
+
 html,
 body {
 	font-family: sans-serif;
-	font-size: 12px;
+	font-size: $fontSize;
 	height: 100%;
 	margin: 0;
 	overflow: hidden;
@@ -21,6 +23,17 @@ body {
 
 .PlayerControls {
 	font-size: 0;
+
+	input[type=range] {
+		width: 100%;
+	}
+}
+
+.PlayerControls-time-elapsed {
+	display: inline-block;
+	font-size: $fontSize;
+	text-align: center;
+	min-width: 3em;
 }
 
 .PlayerControls-icon {
@@ -29,11 +42,16 @@ body {
 	vertical-align: middle;
 }
 
-.PlayerControls input[type=range] {
-	width: 100%;
-}
-
 .SongsGrid {
 	// bottom/top expected TBD by skin
 	height: auto;
+
+	.dgrid-cell {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.field-length {
+		width: 5em;
+	}
 }

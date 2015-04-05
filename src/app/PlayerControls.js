@@ -3,8 +3,9 @@ define([
 	'dojo/dom-construct',
 	'dojo/on',
 	'dojo/Stateful',
+	'./util',
 	'dojo/text!./templates/PlayerControls.html'
-], function (declare, domConstruct, on, Stateful, template) {
+], function (declare, domConstruct, on, Stateful, util, template) {
 	// TODO: This should eventually present custom controls instead of just using the audio element's.
 	return declare(Stateful, {
 		baseClass: 'PlayerControls',
@@ -28,6 +29,7 @@ define([
 			'controls-fastforward': 'fastForward',
 			'controls-next': 'next',
 			'seek-slider': 'seek',
+			'time-elapsed': 'timeElapsed',
 			'volume-unmuted': 'mute',
 			'volume-slider': 'volume'
 		},
@@ -65,7 +67,7 @@ define([
 			onClickBind('playNode', 'togglePlay');
 			onClickBind('fastForwardNode', 'fastForward');
 			onClickBind('muteNode', '_toggleMute');
-			on(this.audioNode, 'timeupdate', this._updateSeekValue.bind(this));
+			on(this.audioNode, 'timeupdate', this._updateTime.bind(this));
 
 			on(this.seekNode, 'change', function (event) {
 				self.seek(self.seekNode.value);
@@ -124,8 +126,10 @@ define([
 			return on.emit(this.domNode, event.type, event);
 		},
 
-		_updateSeekValue: function () {
-			this.seekNode.value = Math.round(this.audioNode.currentTime);
+		_updateTime: function () {
+			var time = Math.round(this.audioNode.currentTime);
+			this.seekNode.value = time;
+			this.timeElapsedNode.innerHTML = util.readableTime(time);
 		},
 
 		_toggleMute: function () {
