@@ -69,6 +69,13 @@ define([
 			onClickBind('muteNode', '_toggleMute');
 			on(this.audioNode, 'timeupdate', this._updateTime.bind(this));
 
+			on(this.seekNode, 'mousedown', function (event) {
+				// Set flag to prevent seek bar from moving due to elapsed time while user is dragging it
+				self._isUserSeeking = true;
+				on.once(document.documentElement, 'mouseup', function (event) {
+					self._isUserSeeking = false;
+				});
+			});
 			on(this.seekNode, 'change', function (event) {
 				self.seek(self.seekNode.value);
 			});
@@ -128,7 +135,9 @@ define([
 
 		_updateTime: function () {
 			var time = Math.round(this.audioNode.currentTime);
-			this.seekNode.value = time;
+			if (!this._isUserSeeking) {
+				this.seekNode.value = time;
+			}
 			this.timeElapsedNode.innerHTML = util.readableTime(time);
 		},
 
