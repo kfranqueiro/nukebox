@@ -3,19 +3,19 @@
 var path = require('path');
 var spawn = require('child_process').spawn;
 
-var productName = 'Nukebox';
-var name = 'nukebox';
+var outputDir = 'electron';
+var name = 'Nukebox';
 var cwd = path.resolve(__dirname, '..');
 
 // Linux
-var cmd = path.join(cwd, 'atom-shell', name);
+var cmd = path.join(cwd, outputDir, name.toLowerCase());
 
 if (process.platform === 'darwin') {
-    cmd = path.join(cwd, 'atom-shell', productName + '.app', 'Contents', 'MacOS', productName);
+    cmd = path.join(cwd, outputDir, name + '.app', 'Contents', 'MacOS', name);
 }
 
 if (process.platform === 'win32') {
-    cmd = path.join(cwd, 'atom-shell', name + '.exe');
+    cmd = path.join(cwd, outputDir, name.toLowerCase() + '.exe');
 }
 
 var child = spawn(cmd, [ '.' ], {

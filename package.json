@@ -1,6 +1,6 @@
 {
 	"name": "nukebox",
-	"description": "A music player built with atom-shell.",
+	"description": "A music player built with Electron and dgrid.",
 	"version": "0.0.1-pre",
 	"main": "src/browser/main.js",
 	"author": "Kenneth G. Franqueiro"

@@ -1,6 +1,6 @@
 {
 	"name": "nukebox",
-	"description": "A music player built with atom-shell.",
+	"description": "A music player built with Electron and dgrid.",
 	"authors": [ "Kenneth G. Franqueiro" ],
 	"dependencies": {
 		"dojo": "~1.10.4",

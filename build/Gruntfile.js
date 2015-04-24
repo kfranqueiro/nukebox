@@ -1,23 +1,74 @@
-var os = require('os');
+var fs = require('fs');
+var path = require('path');
+
+function rename(basePath, oldName, newName) {
+	fs.renameSync(path.resolve(basePath, oldName), path.join(basePath, newName));
+}
 
 module.exports = function (grunt) {
-	grunt.loadNpmTasks('grunt-build-atom-shell');
+	grunt.loadNpmTasks('grunt-download-electron');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-stylus');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-text-replace');
+
+	grunt.registerTask('rename-electron', 'Renames the electron app/binary.', function () {
+		var originalName = 'Electron';
+		var lcOriginalName = originalName.toLowerCase();
+		var name = grunt.config.get('rename-electron').name;
+		var lcName = name.toLowerCase();
+		var outputDir = grunt.config.get('download-electron').outputDir;
+
+		// Mac OS X (rename ALL the things!)
+		grunt.file.expand({
+			cwd: '../electron'
+		}, [
+			'**/MacOS/Electron Helper*',
+			'**/MacOS/Electron',
+			'**/Electron Helper*.app',
+			'**/Electron.app'
+		]).forEach(function (filename) {
+			var destination = path.join(path.dirname(filename),
+				path.basename(filename).replace(originalName, name));
+			rename('../electron', filename, destination);
+		});
+
+		if (grunt.file.exists(outputDir, lcOriginalName + '.exe')) {
+			// Windows
+			rename(outputDir, lcOriginalName + '.exe', lcName + '.exe');
+		}
+		else if (grunt.file.exists(outputDir, lcOriginalName)) {
+			// Linux
+			rename(outputDir, lcOriginalName, lcName);
+		}
+	});
 
 	// Note: Paths below generally all start with .. since this file is within the build subfolder.
-	// Normally, atom-shell apps promote calling grunt.file.setBase to avoid this, but...
+	// Normally, Electron apps promote calling grunt.file.setBase to avoid this, but...
 	// https://github.com/gruntjs/grunt-contrib-watch/issues/426
 
 	grunt.initConfig({
-		'build-atom-shell': {
-			tag: 'v0.22.2',
-			nodeVersion: '0.22.0',
-			buildDir: os.tmpdir() + '/atom-shell',
-			targetDir: '../atom-shell',
-			projectName: 'nukebox',
-			productName: 'Nukebox'
+		'download-electron': {
+			version: '0.25.1',
+			outputDir: '../electron'
+		},
+
+		'rename-electron': {
+			name: 'Nukebox'
+		},
+
+		replace: {
+			plist: {
+				src: [
+					'../electron/Nukebox.app/Contents/Info.plist',
+					'../electron/Nukebox.app/Contents/Frameworks/*Helper*/Contents/Info.plist'
+				],
+				overwrite: true,
+				replacements: [ {
+					from: 'Electron',
+					to: 'Nukebox'
+				} ]
+			}
 		},
 
 		clean: {
@@ -52,5 +103,5 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('default', [ 'stylus', 'watch' ]);
-	grunt.registerTask('build', [ 'build-atom-shell', 'stylus' ]);
+	grunt.registerTask('build', [ 'download-electron', 'rename-electron', 'replace', 'stylus' ]);
 };

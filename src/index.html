@@ -12,12 +12,12 @@
 				async: true,
 				deps: [ 'app/main' ],
 				has: {
-					'host-node': false // Prevent dojo from being fooled by atom-shell
+					'host-node': false // Prevent dojo from being fooled by Electron
 				}
 			};
 
-			// Move atom-shell's require out for Dojo
-			window.atomRequire = require;
+			// Move Electron's require out for Dojo
+			window.electronRequire = require;
 			delete window.require;
 		</script>
 		<script src="dojo/dojo.js"></script>
@@ -28,14 +28,14 @@
 			window.dojoRequire = require;
 			delete window.require;
 			// Also move out 'module' so that id3 truly loads like an AMD module
-			window.atomModule = module;
+			window.electronModule = module;
 			delete window.module;
 		</script>
 		<script src="id3/dist/id3.js"></script>
 		<script>
-			// Move atom's things back in place
-			window.require = window.atomRequire;
-			window.module = window.atomModule;
+			// Move Electron's things back in place
+			window.require = window.electronRequire;
+			window.module = window.electronModule;
 		</script>
 	</body>
 </html>

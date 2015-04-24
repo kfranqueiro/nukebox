@@ -1,4 +1,4 @@
-atom-shell
+electron
 node_modules
 *.css
 /src/d*
