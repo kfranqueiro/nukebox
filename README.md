@@ -3,6 +3,8 @@
 Nukebox is a music player built using [atom-shell](https://github.com/atom/atom-shell/) and
 [dgrid](http://dgrid.io/).
 
+![nukebox](./nukebox.png)
+
 # Build Instructions
 
 First, make sure you have the [prerequisites for building atom-shell on your platform](https://github.com/atom/atom-shell/tree/master/docs#development).
