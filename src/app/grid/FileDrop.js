@@ -27,8 +27,6 @@ define([
 		 * Method intended to be overridden with specific logic for processing dropped files.
 		 * @param {FileList} files Files dropped into the content area
 		 */
-		_onFilesDrop: function (files) {
-			console.log(files);
-		}
+		_onFilesDrop: function (/* files */) {}
 	});
 });

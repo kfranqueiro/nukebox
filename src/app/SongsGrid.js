@@ -4,20 +4,20 @@ define([
 	'dgrid/OnDemandGrid',
 	'dgrid/Keyboard',
 	'dgrid/Selection',
-	'dgrid/extensions/ColumnHider',
+	'dgrid/extensions/ColumnResizer',
 	'./grid/FileDrop',
 	'./grid/Player',
 	'dstore/Memory',
 	'dstore/Trackable',
 	'./audioInfo',
 	'dojo/i18n!./nls/main'
-], function (declare, keys, OnDemandGrid, Keyboard, Selection, ColumnHider, FileDrop, Player,
+], function (declare, keys, OnDemandGrid, Keyboard, Selection, ColumnResizer, FileDrop, Player,
 		Memory, Trackable, audioInfo, i18n) {
 
 	// TODO: persistence
 	var store = new (declare([ Memory, Trackable ]))();
 
-	return declare([ OnDemandGrid, Keyboard, Selection, ColumnHider, FileDrop, Player ], {
+	return declare([ OnDemandGrid, Keyboard, Selection, ColumnResizer, FileDrop, Player ], {
 		className: 'SongsGrid',
 		cellNavigation: false,
 		collection: store,
@@ -63,8 +63,7 @@ define([
 			for (var i = 0, length = files.length; i < length; i++) {
 				tracks[i] = store.addSync({
 					path: files[i].path,
-					title: files[i].name.slice(0, -4),
-					length: files[i].size
+					title: files[i].name.slice(0, -4)
 				});
 			}
 
@@ -73,7 +72,7 @@ define([
 				audioInfo(files[i]).then(function (info) {
 					track.artist = info.artist;
 					track.album = info.album;
-					track.title = info.title;
+					track.title = info.title || track.title;
 					track.length = info.length;
 				}, function () {
 					track.unplayable = true;

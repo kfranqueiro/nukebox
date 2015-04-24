@@ -6,7 +6,6 @@ define([
 	'./util',
 	'dojo/text!./templates/PlayerControls.html'
 ], function (declare, domConstruct, on, Stateful, util, template) {
-	// TODO: This should eventually present custom controls instead of just using the audio element's.
 	return declare(Stateful, {
 		baseClass: 'PlayerControls',
 

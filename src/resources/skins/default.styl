@@ -6,6 +6,7 @@ $controlsHeight = 36px;
 $controlsPadding = 5px;
 $controlsVolumeWidth = 100px;
 $buttonSize = 24px;
+$buttonMargin = 2px;
 $iconSize = 16px;
 
 .PlayerControls,
@@ -27,7 +28,7 @@ $iconSize = 16px;
 
 	&-icon {
 		border: 1px solid $controlsMainColor;
-		border-radius: ($buttonSize / 2);
+		border-radius: (($buttonSize + $buttonMargin) / 2);
 		color: $controlsMainColor;
 		cursor: pointer;
 		font-size: $iconSize;
@@ -51,7 +52,7 @@ $iconSize = 16px;
 	}
 
 	&-controls &-icon {
-		margin: 2px;
+		margin: $buttonMargin;
 	}
 
 	&-seek {
