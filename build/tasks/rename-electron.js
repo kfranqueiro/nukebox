@@ -7,9 +7,11 @@ function rename(basePath, oldName, newName) {
 
 module.exports = function (grunt) {
 	grunt.registerTask('rename-electron', 'Renames the electron app/binary.', function () {
+		this.requiresConfig(this.name + '.name');
+
 		var originalName = 'Electron';
 		var lcOriginalName = originalName.toLowerCase();
-		var name = grunt.config.get('rename-electron').name;
+		var name = grunt.config.get(this.name + '.name');
 		var lcName = name.toLowerCase();
 		var outputDir = grunt.config.get('download-electron').outputDir;
 

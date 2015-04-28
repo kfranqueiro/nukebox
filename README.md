@@ -7,6 +7,8 @@ Nukebox is a music player built using [Electron](https://github.com/atom/electro
 
 # Build Instructions
 
+## Development
+
 1. Clone this repository
 1. `bower install`
 1. `cd build`
@@ -15,11 +17,22 @@ Nukebox is a music player built using [Electron](https://github.com/atom/electro
   * You may need to run this more than once; `grunt-download-electron` seems to sometimes just
     exit immediately without signaling either success or failure on Windows and Linux.
 
+
+## Release
+
+In the `build` directory, run `grunt release`
+
 # Usage
 
 ## Running the Application
 
+### Development
+
 Run `bin/run` (or `bin/run.cmd` on Windows).
+
+### Release
+
+In the `electron` directory, run `nukebox.exe`, `Nukebox.app`, or `nukebox` (depending on OS).
 
 ## Adding Music
 
