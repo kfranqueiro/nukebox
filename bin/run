@@ -18,8 +18,11 @@ if (process.platform === 'win32') {
     cmd = path.join(cwd, outputDir, name.toLowerCase() + '.exe');
 }
 
+var env = Object.create(process.env);
+env.NUKEBOX_DEBUG = 1;
 var child = spawn(cmd, [ '.' ], {
-	cwd: cwd
+	cwd: cwd,
+    env: env
 });
 child.stdout.on('data', function (data) {
     console.log(data.toString());
