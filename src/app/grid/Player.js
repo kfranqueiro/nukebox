@@ -48,7 +48,22 @@ define([
 			if (event.type === 'delete' && event.previousIndex <= playingIndex) {
 				this._playingIndex--;
 			}
-			// TODO: need more logic here when reordering is added
+			else if (event.type === 'update') {
+				if (event.previousIndex < playingIndex && event.index >= playingIndex) {
+					this._playingIndex--;
+				}
+				else if (event.previousIndex > playingIndex && event.index <= playingIndex) {
+					this._playingIndex++;
+				}
+				else if (event.previousIndex === playingIndex) {
+					this._playingIndex = event.index;
+				}
+			}
+			else if (event.type === 'add') {
+				if (event.index <= playingIndex) {
+					this._playingIndex++;
+				}
+			}
 		},
 
 		_playNeighbor: function (step) {

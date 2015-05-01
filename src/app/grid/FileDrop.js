@@ -16,9 +16,10 @@ define([
 			});
 			on(this.contentNode, 'drop', function (event) {
 				event.preventDefault();
+				var row = self.row(event);
 				var files = event.dataTransfer.files;
 				if (files && files.length) {
-					self._onFilesDrop(files);
+					self._onFilesDrop(files, row ? row.id : null);
 				}
 			});
 		},

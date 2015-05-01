@@ -5,19 +5,20 @@ define([
 	'dgrid/Keyboard',
 	'dgrid/Selection',
 	'dgrid/extensions/ColumnResizer',
+	'dgrid/extensions/DnD',
 	'./grid/FileDrop',
 	'./grid/Player',
 	'dstore/Memory',
 	'dstore/Trackable',
 	'./audioInfo',
 	'dojo/i18n!./nls/main'
-], function (declare, keys, OnDemandGrid, Keyboard, Selection, ColumnResizer, FileDrop, Player,
+], function (declare, keys, OnDemandGrid, Keyboard, Selection, ColumnResizer, DnD, FileDrop, Player,
 		Memory, Trackable, audioInfo, i18n) {
 
 	// TODO: persistence
 	var store = new (declare([ Memory, Trackable ]))();
 
-	return declare([ OnDemandGrid, Keyboard, Selection, ColumnResizer, FileDrop, Player ], {
+	return declare([ OnDemandGrid, Keyboard, Selection, ColumnResizer, DnD, FileDrop, Player ], {
 		className: 'SongsGrid',
 		cellNavigation: false,
 		collection: store,
@@ -57,14 +58,14 @@ define([
 			}
 		},
 
-		_onFilesDrop: function (files) {
+		_onFilesDrop: function (files, beforeId) {
 			var tracks = [];
 
 			for (var i = 0, length = files.length; i < length; i++) {
 				tracks[i] = store.addSync({
 					path: files[i].path,
 					title: files[i].name.slice(0, -4)
-				});
+				}, { beforeId: beforeId });
 			}
 
 			// Attempt to parse id3 metadata; update the store if successful
