@@ -4,32 +4,32 @@ var path = require('path');
 var spawn = require('child_process').spawn;
 
 var outputDir = 'electron';
-var name = 'Nukebox';
+var name = 'Electron';
 var cwd = path.resolve(__dirname, '..');
 
 // Linux
 var cmd = path.join(cwd, outputDir, name.toLowerCase());
 
 if (process.platform === 'darwin') {
-    cmd = path.join(cwd, outputDir, name + '.app', 'Contents', 'MacOS', name);
+	cmd = path.join(cwd, outputDir, name + '.app', 'Contents', 'MacOS', name);
 }
 
 if (process.platform === 'win32') {
-    cmd = path.join(cwd, outputDir, name.toLowerCase() + '.exe');
+	cmd = path.join(cwd, outputDir, name.toLowerCase() + '.exe');
 }
 
 var env = Object.create(process.env);
-env.NUKEBOX_DEBUG = 1;
-var child = spawn(cmd, [ '.' ], {
+env.ELECTRON_APP_DEBUG = 1;
+var child = spawn(cmd, [ 'src' ], {
 	cwd: cwd,
-    env: env
+	env: env
 });
 child.stdout.on('data', function (data) {
-    console.log(data.toString());
+	console.log(data.toString());
 });
 child.stderr.on('data', function (data) {
-    console.error(data.toString());
+	console.error(data.toString());
 });
 child.on('close', function (code) {
-    process.exit(code);
+	process.exit(code);
 });

@@ -1,6 +1,7 @@
-var app = require('app');
-var BrowserWindow = require('browser-window');
-var Menu = require('menu');
+var electron = require('electron');
+var app = electron.app;
+var BrowserWindow = electron.BrowserWindow;
+var Menu = electron.Menu;
 
 var menu = require('./menu');
 
@@ -19,7 +20,7 @@ app.on('ready', function () {
 	});
 
 	Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
-	mainWindow.loadUrl('file://' + require('path').resolve(__dirname, '..', 'index.html'));
+	mainWindow.loadURL('file://' + require('path').resolve(__dirname, '..', 'index.html'));
 
 	mainWindow.on('closed', function () {
 		mainWindow = null;

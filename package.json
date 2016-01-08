@@ -1,7 +1,21 @@
 {
 	"name": "nukebox",
 	"description": "A music player built with Electron and dgrid.",
-	"version": "0.0.1-pre",
+	"version": "0.1.0",
 	"main": "src/browser/main.js",
-	"author": "Kenneth G. Franqueiro"
+	"author": "Kenneth G. Franqueiro",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "http://github.com/kfranqueiro/nukebox"
+	},
+	"devDependencies": {
+		"electron-download": "~1.4.1",
+		"electron-packager": "5.2.0",
+		"extract-zip": "~1.4.1",
+		"grunt": "~0.4.5",
+		"grunt-contrib-clean": "~0.7.0",
+		"grunt-contrib-stylus": "~0.22.0",
+		"grunt-contrib-watch": "~0.6.1"
+	}
 }
