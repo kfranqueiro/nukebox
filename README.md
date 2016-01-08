@@ -24,11 +24,13 @@ Run `grunt release`
 
 ### Development
 
-Run `bin/run` (or `bin/run.cmd` on Windows).
+Run `bin/run` (or `bin\run.cmd` on Windows).
 
 ### Release
 
-In the `electron` directory, run `nukebox.exe`, `Nukebox.app`, or `nukebox` (depending on OS).
+Run the application for the respective platform under `dist`.
+Windows releases contain `Nukebox.exe`, Linux releases contain a `Nukebox` binary, and
+the Mac release contains `Nukebox.app`.
 
 ## Adding Music
 
