@@ -1,17 +1,20 @@
 # Nukebox
 
-Nukebox is a music player built using [Electron](https://github.com/atom/electron/) and
+Nukebox is a music player built using [Electron](http://electron.atom.io/) and
 [dgrid](http://dgrid.io/).
 
 ![nukebox](./nukebox.png)
 
 # Build Instructions
 
+## Requirements
+
+You will need `bower` and `grunt-cli` installed globally (i.e. `npm i -g bower grunt-cli`).
+
 ## Development
 
 1. Clone this repository
-1. `bower install`
-1. `npm install`
+1. `npm install` (which will in turn run `bower install`, then `npm install` inside of `src`)
 1. `grunt dev`
 
 ## Release

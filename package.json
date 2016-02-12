@@ -17,5 +17,8 @@
 		"grunt-contrib-clean": "~0.7.0",
 		"grunt-contrib-stylus": "~0.22.0",
 		"grunt-contrib-watch": "~0.6.1"
+	},
+	"scripts": {
+		"install": "bower install; cd src; npm install;"
 	}
 }

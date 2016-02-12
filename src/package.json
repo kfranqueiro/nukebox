@@ -1,4 +1,7 @@
 {
 	"name": "nukebox",
-	"main": "browser/main.js"
+	"main": "browser/main.js",
+	"dependencies": {
+		"musicmetadata": "~2.0.2"
+	}
 }

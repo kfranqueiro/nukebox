@@ -22,20 +22,8 @@
 		</script>
 		<script src="dojo/dojo.js"></script>
 		<script>
-			// Now move dojoRequire out, but don't put require back yet,
-			// because id3js is silly and assumes that if require exists, it's node
-			// (even though it uses an UMD wrapper...)
 			window.dojoRequire = require;
-			delete window.require;
-			// Also move out 'module' so that id3 truly loads like an AMD module
-			window.electronModule = module;
-			delete window.module;
-		</script>
-		<script src="id3/dist/id3.js"></script>
-		<script>
-			// Move Electron's things back in place
 			window.require = window.electronRequire;
-			window.module = window.electronModule;
 		</script>
 	</body>
 </html>

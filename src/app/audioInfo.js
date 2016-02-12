@@ -2,10 +2,9 @@ define([
 	'dojo/_base/lang',
 	'dojo/Deferred',
 	'dojo/on',
-	'id3',
 	'./util'
-], function (lang, Deferred, on, id3, util) {
-	id3 = util.promisify(id3);
+], function (lang, Deferred, on, util) {
+	var mm = util.promisify(require('musicmetadata'));
 
 	/**
 	 * Returns information on the given File, including tags and song length.
@@ -13,7 +12,7 @@ define([
 	 * @return {Promise} Promise resolving to an object with artist, album, title, and length
 	 */
 	return function (file) {
-		return id3(file).then(function (tags) {
+		return mm(require('fs').createReadStream(file.path)).then(function (tags) {
 			return tags;
 		}, function () {
 			return {};

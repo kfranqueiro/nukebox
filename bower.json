@@ -4,8 +4,7 @@
 	"authors": [ "Kenneth G. Franqueiro" ],
 	"dependencies": {
 		"dojo": "~1.10.4",
-		"dgrid": "SitePen/dgrid#623066e",
-		"id3": "43081j/id3#eb9ab46",
+		"dgrid": "~1.0",
 		"octicons": "2.2.1"
 	},
 	"license": [ "MIT" ]
