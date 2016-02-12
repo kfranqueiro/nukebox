@@ -19,7 +19,7 @@ if (process.platform === 'win32') {
 }
 
 var env = Object.create(process.env);
-env.ELECTRON_APP_DEBUG = 1;
+env.NUKEBOX_DEBUG = 1;
 var child = spawn(cmd, [ 'src' ], {
 	cwd: cwd,
 	env: env

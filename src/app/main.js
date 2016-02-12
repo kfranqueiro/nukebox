@@ -9,7 +9,7 @@ define([
 	var grid = new SongsGrid({
 		playerControls: controls
 	});
-	var ipc = require('ipc');
+	var ipc = require('electron').ipcRenderer;
 
 	[ controls, grid ].forEach(function (widget) {
 		document.body.appendChild(widget.domNode);

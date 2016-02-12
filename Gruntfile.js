@@ -5,11 +5,9 @@ module.exports = function (grunt) {
 
 	grunt.loadTasks('tasks');
 
-	var packageConfig = grunt.file.readJSON('package.json');
-
 	grunt.initConfig({
 		appName: 'Nukebox',
-		electronVersion: '0.36.2',
+		electronVersion: '0.36.7',
 
 		'electron-download': {
 			options: {
