@@ -16,8 +16,8 @@ define([
 		widget.startup();
 	});
 
-	ipc.on('option', function (option, value) {
-		if (option === 'repeat') {
+	ipc.on('option', function (event, property, value) {
+		if (property === 'repeat') {
 			grid.set('repeat', value);
 		}
 	});
